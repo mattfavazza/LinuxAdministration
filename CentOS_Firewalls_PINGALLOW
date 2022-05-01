@@ -1,0 +1,6 @@
+#!/bin/bash
+#allows telnet and ICMP pings
+sudo iptables -A INPUT -p tcp 23 -j ALLOW
+sudo iptables -A INPUT -p udp 23 -j ALLOW
+sudo iptables -A INPUT -p tcp 5813 -j ALLOW
+sudo iptables -A INPUT -p udp 5813 -j ALLOW

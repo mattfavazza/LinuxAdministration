@@ -1,0 +1,6 @@
+#!/bin/bash
+#Opens ports required for email services 
+sudo ufw allow 465
+sudo ufw allow 993
+sudo ufw allow 995
+sudo ufw status

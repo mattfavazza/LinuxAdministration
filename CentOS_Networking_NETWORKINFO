@@ -1,0 +1,38 @@
+#!bin/bash
+
+output=NetworkingOutput
+#sets a variable $output to be used to redirect the output from each command into the file NetworkingOutput
+date '+%x %T %Z' >> $output
+echo " " >> $output
+#Prints the date, 24 hour time, and timezone 
+
+echo "IPV4 Address, Netmask, and Broadcast IPs are" >> $output
+ifconfig | sed 's/^[ \t]*//' | grep 'inet 192.168.[0-9][0-9][0-9].[0-9][0-9][0-9]' >> $output
+echo " " >> $output
+#Runs ifconfig and uses the sed command to remove leading whitespace then uses grep to search for a the IP addresses in the range of 192.168.xxx.xxx
+
+echo "IPV6 Loopback and Broadcast/Multicast Address" >> $output
+ip -6 addr | sed 's/^[ \t]*//' | grep inet6 >> $output
+echo " " >> $output
+#Gets the IPV6 address. The SED command removes leading whitespace. Grep filters to show just the IPs the first being the loopback and the second is the Broad/Multicast address.
+
+echo "Default Gateways are" >> $output 
+echo "IPV4" >> $output
+route -n | awk -F '0.0.0.0' '{print $2}' | sed 's/^[ \t]*//' | grep 192.168 >> $output
+#This searches the routing table and prints the second column using AWK with the search parameter being 0.0.0.0 as that is the default gateway. I then removes leading whitespace with SED and filters for the 192.168 scheme as that is what is used in our networking configurations
+echo "IPV6" >> $output
+route -A inet6 | grep fe80 | awk '{print $1}' >> $output
+#This searches for the IPV6 routing table and filters out the fe80 line and uses AWK to print the first column of that table. 
+echo " " >> $output
+
+echo "DNS Servers are" >> $output
+grep "nameserver" /etc/resolv.conf | awk '{print $2}' >> $output
+echo " " >> $output
+#Seraches /etc/resolv.conf for the nameserver line then prints the second column using awk
+
+echo "Open Ports are" >> $output
+sudo lsof -i -P -n >> $output
+#Prints the entire table of open ports
+
+cat NetworkingOutput
+#prints the new file NetworkingOutput with the results of the above commands

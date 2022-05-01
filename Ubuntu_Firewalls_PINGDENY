@@ -1,0 +1,3 @@
+#!/bin/bash
+#blocks ICMP requests 
+sudo sed -i '/ufw-before-input.*icmp/s/ACCEPT/DROP/g' /etc/ufw/before.rules

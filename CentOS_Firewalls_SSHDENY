@@ -1,0 +1,4 @@
+#!/bin/bash
+#Deny SSH
+sudo iptables -A INPUT -p tcp --dport 22 -j DROP
+sudo iptables -A INPUT -p udp --dport 22 -j DROP

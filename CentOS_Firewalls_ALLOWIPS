@@ -1,0 +1,4 @@
+#!/bin/bash
+#allow certain IPs and MACs
+sudo iptables -I INPUT -s 192.168.139.250 -j ALLOW
+sudo iptables -A INPUT -m mac --mac-source 00:00:00:00:00:AA -j ALLOW

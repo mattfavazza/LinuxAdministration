@@ -1,0 +1,8 @@
+#!/bin/bash
+#Deny Emails
+sudo iptables -A INPUT -p tcp --dport 587 -j DROP
+sudo iptables -A INPUT -p udp --dport 587 -j DROP
+sudo iptables -A INPUT -p tcp --dport 993 -j DROP
+sudo iptables -A INPUT -p udp --dport 993 -j DROP
+sudo iptables -A INPUT -p tcp --dport 995 -j DROP
+sudo iptables -A INPUT -p udp --dport 995 -j DROP

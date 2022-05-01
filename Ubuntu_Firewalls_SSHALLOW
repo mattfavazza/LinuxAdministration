@@ -1,0 +1,4 @@
+#!/bin/bash
+#opens port 22 and displays the ufw status
+sudo ufw allow 22
+sudo ufw status

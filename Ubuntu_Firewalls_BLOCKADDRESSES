@@ -1,0 +1,8 @@
+#!/bin/bash
+#Blocking IPV4 and MAC addressses
+
+#IP ADDRESSES
+sudo ufw deny from 192.168.139.250 to any
+
+#MAC ADDRESSES
+sudo iptables -A INPUT -m mac --mac-source 00:00:00:00:00:AA -j DROP

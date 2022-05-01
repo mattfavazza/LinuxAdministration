@@ -1,0 +1,5 @@
+#!bin/bash
+#closes port 22 and displays status
+sudo ufw deny 22
+sudo ufw status
+

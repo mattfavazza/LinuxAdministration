@@ -1,0 +1,6 @@
+#!/bin/bash
+#Closes ports required for email services
+sudo ufw deny 465
+sudo ufw deny 993
+sudo ufw deny 995
+sudo ufw status 
